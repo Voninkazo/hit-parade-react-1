@@ -1,0 +1,234 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/montserrat-regular.865d9a13.woff2") format("woff2"), url("/montserrat-regular.3bd57484.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+html {
+  font-size: 16px;
+  font-family: "Montserrat";
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-family: "Montserrat";
+  font-size: 72px;
+  line-height: 88px;
+  color: #272343;
+}
+
+#root {
+  padding: 20px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.song-container {
+  background: #272343;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 42px;
+}
+.song-container ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+}
+.links-container a {
+  text-decoration: none;
+  font-size: 36px;
+  line-height: 44px;
+  color: #272343;
+  white-space: nowrap;
+}
+.links-container a:focus {
+  font-weight: bold;
+}
+
+.artist {
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFE;
+}
+
+.price {
+  font-size: 36px;
+  line-height: 44px;
+  color: #FFD803;
+}
+
+.buying-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 101px;
+}
+.buying-container .amount {
+  font-size: 32px;
+  line-height: 48px;
+  color: #BAE8E8;
+}
+.buying-container .btn-to-buy {
+  font-size: 25px;
+  line-height: 28px;
+  color: #000000;
+  background-color: #FFD803;
+  border: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+.buying-container b {
+  color: #000000;
+}
+.buying-container p:nth-of-type(1) {
+  font-size: 20px;
+  line-height: 28px;
+}
+.buying-container p:nth-of-type(1) b {
+  color: aqua;
+}
+
+img {
+  cursor: pointer;
+}
+
+.song-detail {
+  background: #272343;
+  border-radius: 5px;
+  padding-left: 70px;
+  padding-right: 78px;
+  padding-bottom: 85px;
+  padding-top: 56px;
+}
+.song-detail p {
+  font-size: 18px;
+  line-height: 22px;
+  color: #FFFFFF;
+}
+
+.title {
+  font-size: 36px;
+  line-height: 44px;
+  color: #FFFFFE;
+}
+
+.list-items-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.list-items-container span,
+.list-items-container img {
+  margin-left: 5px;
+}
+.list-items-container span {
+  font-size: 24px;
+  line-height: 29px;
+  color: #BAE8E8;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  font-size: 64px;
+  line-height: 78px;
+  /* identical to box height */
+  color: #000000;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 36px;
+  line-height: 44px;
+  color: #FFFFFE;
+  font-weight: 400;
+}
+
+.style-container {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  list-style: none;
+  padding: 0;
+  margin-top: 42px;
+}
+.style-container li {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+.style-container button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 10px 20px;
+  outline: none;
+}
+.style-container button:hover {
+  color: #FFD803;
+  transition: 0.3s;
+}
+
+.card--style {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  background-color: #272343;
+  border-radius: 5px;
+  padding: 37px 30px;
+  margin-top: 20px;
+}
+
+.img {
+  width: 30px;
+  height: 30px;
+}
+
+.style--name {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.style {
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 30px;
+  color: #000000;
+  padding-left: 20px;
+}
+
+@media (min-width: 1114px) {
+  #root {
+    max-width: 1114px;
+    margin: auto;
+    padding: 0;
+    padding-bottom: 40px;
+  }
+}
+
+/*# sourceMappingURL=/hit-parade-react.80ee2152.css.map */

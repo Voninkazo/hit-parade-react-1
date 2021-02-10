@@ -30003,250 +30003,7 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-is.development.js');
 }
-},{"./cjs/react-is.development.js":"node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js"}],"node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
-/** @license React v17.0.1
- * react-is.development.js
- *
- * Copyright (c) Facebook, Inc. and its affiliates.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-'use strict';
-
-if ("development" !== "production") {
-  (function () {
-    'use strict'; // ATTENTION
-    // When adding new symbols to this file,
-    // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
-    // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-    // nor polyfill, then a plain number is used for performance.
-
-    var REACT_ELEMENT_TYPE = 0xeac7;
-    var REACT_PORTAL_TYPE = 0xeaca;
-    var REACT_FRAGMENT_TYPE = 0xeacb;
-    var REACT_STRICT_MODE_TYPE = 0xeacc;
-    var REACT_PROFILER_TYPE = 0xead2;
-    var REACT_PROVIDER_TYPE = 0xeacd;
-    var REACT_CONTEXT_TYPE = 0xeace;
-    var REACT_FORWARD_REF_TYPE = 0xead0;
-    var REACT_SUSPENSE_TYPE = 0xead1;
-    var REACT_SUSPENSE_LIST_TYPE = 0xead8;
-    var REACT_MEMO_TYPE = 0xead3;
-    var REACT_LAZY_TYPE = 0xead4;
-    var REACT_BLOCK_TYPE = 0xead9;
-    var REACT_SERVER_BLOCK_TYPE = 0xeada;
-    var REACT_FUNDAMENTAL_TYPE = 0xead5;
-    var REACT_SCOPE_TYPE = 0xead7;
-    var REACT_OPAQUE_ID_TYPE = 0xeae0;
-    var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
-    var REACT_OFFSCREEN_TYPE = 0xeae2;
-    var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
-
-    if (typeof Symbol === 'function' && Symbol.for) {
-      var symbolFor = Symbol.for;
-      REACT_ELEMENT_TYPE = symbolFor('react.element');
-      REACT_PORTAL_TYPE = symbolFor('react.portal');
-      REACT_FRAGMENT_TYPE = symbolFor('react.fragment');
-      REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
-      REACT_PROFILER_TYPE = symbolFor('react.profiler');
-      REACT_PROVIDER_TYPE = symbolFor('react.provider');
-      REACT_CONTEXT_TYPE = symbolFor('react.context');
-      REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
-      REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
-      REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
-      REACT_MEMO_TYPE = symbolFor('react.memo');
-      REACT_LAZY_TYPE = symbolFor('react.lazy');
-      REACT_BLOCK_TYPE = symbolFor('react.block');
-      REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
-      REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
-      REACT_SCOPE_TYPE = symbolFor('react.scope');
-      REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
-      REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
-      REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
-      REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
-    } // Filter certain DOM attributes (e.g. src, href) if their values are empty strings.
-
-
-    var enableScopeAPI = false; // Experimental Create Event Handle API.
-
-    function isValidElementType(type) {
-      if (typeof type === 'string' || typeof type === 'function') {
-        return true;
-      } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
-
-
-      if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI) {
-        return true;
-      }
-
-      if (typeof type === 'object' && type !== null) {
-        if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
-          return true;
-        }
-      }
-
-      return false;
-    }
-
-    function typeOf(object) {
-      if (typeof object === 'object' && object !== null) {
-        var $$typeof = object.$$typeof;
-
-        switch ($$typeof) {
-          case REACT_ELEMENT_TYPE:
-            var type = object.type;
-
-            switch (type) {
-              case REACT_FRAGMENT_TYPE:
-              case REACT_PROFILER_TYPE:
-              case REACT_STRICT_MODE_TYPE:
-              case REACT_SUSPENSE_TYPE:
-              case REACT_SUSPENSE_LIST_TYPE:
-                return type;
-
-              default:
-                var $$typeofType = type && type.$$typeof;
-
-                switch ($$typeofType) {
-                  case REACT_CONTEXT_TYPE:
-                  case REACT_FORWARD_REF_TYPE:
-                  case REACT_LAZY_TYPE:
-                  case REACT_MEMO_TYPE:
-                  case REACT_PROVIDER_TYPE:
-                    return $$typeofType;
-
-                  default:
-                    return $$typeof;
-                }
-
-            }
-
-          case REACT_PORTAL_TYPE:
-            return $$typeof;
-        }
-      }
-
-      return undefined;
-    }
-
-    var ContextConsumer = REACT_CONTEXT_TYPE;
-    var ContextProvider = REACT_PROVIDER_TYPE;
-    var Element = REACT_ELEMENT_TYPE;
-    var ForwardRef = REACT_FORWARD_REF_TYPE;
-    var Fragment = REACT_FRAGMENT_TYPE;
-    var Lazy = REACT_LAZY_TYPE;
-    var Memo = REACT_MEMO_TYPE;
-    var Portal = REACT_PORTAL_TYPE;
-    var Profiler = REACT_PROFILER_TYPE;
-    var StrictMode = REACT_STRICT_MODE_TYPE;
-    var Suspense = REACT_SUSPENSE_TYPE;
-    var hasWarnedAboutDeprecatedIsAsyncMode = false;
-    var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
-
-    function isAsyncMode(object) {
-      {
-        if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-          hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-          console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-        }
-      }
-      return false;
-    }
-
-    function isConcurrentMode(object) {
-      {
-        if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
-          hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
-
-          console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
-        }
-      }
-      return false;
-    }
-
-    function isContextConsumer(object) {
-      return typeOf(object) === REACT_CONTEXT_TYPE;
-    }
-
-    function isContextProvider(object) {
-      return typeOf(object) === REACT_PROVIDER_TYPE;
-    }
-
-    function isElement(object) {
-      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-    }
-
-    function isForwardRef(object) {
-      return typeOf(object) === REACT_FORWARD_REF_TYPE;
-    }
-
-    function isFragment(object) {
-      return typeOf(object) === REACT_FRAGMENT_TYPE;
-    }
-
-    function isLazy(object) {
-      return typeOf(object) === REACT_LAZY_TYPE;
-    }
-
-    function isMemo(object) {
-      return typeOf(object) === REACT_MEMO_TYPE;
-    }
-
-    function isPortal(object) {
-      return typeOf(object) === REACT_PORTAL_TYPE;
-    }
-
-    function isProfiler(object) {
-      return typeOf(object) === REACT_PROFILER_TYPE;
-    }
-
-    function isStrictMode(object) {
-      return typeOf(object) === REACT_STRICT_MODE_TYPE;
-    }
-
-    function isSuspense(object) {
-      return typeOf(object) === REACT_SUSPENSE_TYPE;
-    }
-
-    exports.ContextConsumer = ContextConsumer;
-    exports.ContextProvider = ContextProvider;
-    exports.Element = Element;
-    exports.ForwardRef = ForwardRef;
-    exports.Fragment = Fragment;
-    exports.Lazy = Lazy;
-    exports.Memo = Memo;
-    exports.Portal = Portal;
-    exports.Profiler = Profiler;
-    exports.StrictMode = StrictMode;
-    exports.Suspense = Suspense;
-    exports.isAsyncMode = isAsyncMode;
-    exports.isConcurrentMode = isConcurrentMode;
-    exports.isContextConsumer = isContextConsumer;
-    exports.isContextProvider = isContextProvider;
-    exports.isElement = isElement;
-    exports.isForwardRef = isForwardRef;
-    exports.isFragment = isFragment;
-    exports.isLazy = isLazy;
-    exports.isMemo = isMemo;
-    exports.isPortal = isPortal;
-    exports.isProfiler = isProfiler;
-    exports.isStrictMode = isStrictMode;
-    exports.isSuspense = isSuspense;
-    exports.isValidElementType = isValidElementType;
-    exports.typeOf = typeOf;
-  })();
-}
-},{}],"node_modules/react-is/index.js":[function(require,module,exports) {
-'use strict';
-
-if ("development" === 'production') {
-  module.exports = require('./cjs/react-is.production.min.js');
-} else {
-  module.exports = require('./cjs/react-is.development.js');
-}
-},{"./cjs/react-is.development.js":"node_modules/react-is/cjs/react-is.development.js"}],"node_modules/prop-types/lib/ReactPropTypesSecret.js":[function(require,module,exports) {
+},{"./cjs/react-is.development.js":"node_modules/prop-types/node_modules/react-is/cjs/react-is.development.js"}],"node_modules/prop-types/lib/ReactPropTypesSecret.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -31000,7 +30757,7 @@ module.exports = function (isValidElement, throwOnDirectAccess) {
   ReactPropTypes.PropTypes = ReactPropTypes;
   return ReactPropTypes;
 };
-},{"react-is":"node_modules/react-is/index.js","object-assign":"node_modules/object-assign/index.js","./lib/ReactPropTypesSecret":"node_modules/prop-types/lib/ReactPropTypesSecret.js","./checkPropTypes":"node_modules/prop-types/checkPropTypes.js"}],"node_modules/prop-types/index.js":[function(require,module,exports) {
+},{"react-is":"node_modules/prop-types/node_modules/react-is/index.js","object-assign":"node_modules/object-assign/index.js","./lib/ReactPropTypesSecret":"node_modules/prop-types/lib/ReactPropTypesSecret.js","./checkPropTypes":"node_modules/prop-types/checkPropTypes.js"}],"node_modules/prop-types/index.js":[function(require,module,exports) {
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -33002,7 +32759,205 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
   return target;
 }
-},{}],"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":[function(require,module,exports) {
+},{}],"node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+/** @license React v16.13.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+'use strict';
+
+if ("development" !== "production") {
+  (function () {
+    'use strict'; // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+    // nor polyfill, then a plain number is used for performance.
+
+    var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+    var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+    var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+    var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+    var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+    var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+    var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+    var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+    // (unstable) APIs that have been removed. Can we remove the symbols?
+
+    var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+    var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+    var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+    var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+    var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+    var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+    var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+    var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+    var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+    var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+    var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+    function isValidElementType(type) {
+      return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+      type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+    }
+
+    function typeOf(object) {
+      if (typeof object === 'object' && object !== null) {
+        var $$typeof = object.$$typeof;
+
+        switch ($$typeof) {
+          case REACT_ELEMENT_TYPE:
+            var type = object.type;
+
+            switch (type) {
+              case REACT_ASYNC_MODE_TYPE:
+              case REACT_CONCURRENT_MODE_TYPE:
+              case REACT_FRAGMENT_TYPE:
+              case REACT_PROFILER_TYPE:
+              case REACT_STRICT_MODE_TYPE:
+              case REACT_SUSPENSE_TYPE:
+                return type;
+
+              default:
+                var $$typeofType = type && type.$$typeof;
+
+                switch ($$typeofType) {
+                  case REACT_CONTEXT_TYPE:
+                  case REACT_FORWARD_REF_TYPE:
+                  case REACT_LAZY_TYPE:
+                  case REACT_MEMO_TYPE:
+                  case REACT_PROVIDER_TYPE:
+                    return $$typeofType;
+
+                  default:
+                    return $$typeof;
+                }
+
+            }
+
+          case REACT_PORTAL_TYPE:
+            return $$typeof;
+        }
+      }
+
+      return undefined;
+    } // AsyncMode is deprecated along with isAsyncMode
+
+
+    var AsyncMode = REACT_ASYNC_MODE_TYPE;
+    var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+    var ContextConsumer = REACT_CONTEXT_TYPE;
+    var ContextProvider = REACT_PROVIDER_TYPE;
+    var Element = REACT_ELEMENT_TYPE;
+    var ForwardRef = REACT_FORWARD_REF_TYPE;
+    var Fragment = REACT_FRAGMENT_TYPE;
+    var Lazy = REACT_LAZY_TYPE;
+    var Memo = REACT_MEMO_TYPE;
+    var Portal = REACT_PORTAL_TYPE;
+    var Profiler = REACT_PROFILER_TYPE;
+    var StrictMode = REACT_STRICT_MODE_TYPE;
+    var Suspense = REACT_SUSPENSE_TYPE;
+    var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+    function isAsyncMode(object) {
+      {
+        if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+          hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+          console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+        }
+      }
+      return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+    }
+
+    function isConcurrentMode(object) {
+      return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+    }
+
+    function isContextConsumer(object) {
+      return typeOf(object) === REACT_CONTEXT_TYPE;
+    }
+
+    function isContextProvider(object) {
+      return typeOf(object) === REACT_PROVIDER_TYPE;
+    }
+
+    function isElement(object) {
+      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+    }
+
+    function isForwardRef(object) {
+      return typeOf(object) === REACT_FORWARD_REF_TYPE;
+    }
+
+    function isFragment(object) {
+      return typeOf(object) === REACT_FRAGMENT_TYPE;
+    }
+
+    function isLazy(object) {
+      return typeOf(object) === REACT_LAZY_TYPE;
+    }
+
+    function isMemo(object) {
+      return typeOf(object) === REACT_MEMO_TYPE;
+    }
+
+    function isPortal(object) {
+      return typeOf(object) === REACT_PORTAL_TYPE;
+    }
+
+    function isProfiler(object) {
+      return typeOf(object) === REACT_PROFILER_TYPE;
+    }
+
+    function isStrictMode(object) {
+      return typeOf(object) === REACT_STRICT_MODE_TYPE;
+    }
+
+    function isSuspense(object) {
+      return typeOf(object) === REACT_SUSPENSE_TYPE;
+    }
+
+    exports.AsyncMode = AsyncMode;
+    exports.ConcurrentMode = ConcurrentMode;
+    exports.ContextConsumer = ContextConsumer;
+    exports.ContextProvider = ContextProvider;
+    exports.Element = Element;
+    exports.ForwardRef = ForwardRef;
+    exports.Fragment = Fragment;
+    exports.Lazy = Lazy;
+    exports.Memo = Memo;
+    exports.Portal = Portal;
+    exports.Profiler = Profiler;
+    exports.StrictMode = StrictMode;
+    exports.Suspense = Suspense;
+    exports.isAsyncMode = isAsyncMode;
+    exports.isConcurrentMode = isConcurrentMode;
+    exports.isContextConsumer = isContextConsumer;
+    exports.isContextProvider = isContextProvider;
+    exports.isElement = isElement;
+    exports.isForwardRef = isForwardRef;
+    exports.isFragment = isFragment;
+    exports.isLazy = isLazy;
+    exports.isMemo = isMemo;
+    exports.isPortal = isPortal;
+    exports.isProfiler = isProfiler;
+    exports.isStrictMode = isStrictMode;
+    exports.isSuspense = isSuspense;
+    exports.isValidElementType = isValidElementType;
+    exports.typeOf = typeOf;
+  })();
+}
+},{}],"node_modules/hoist-non-react-statics/node_modules/react-is/index.js":[function(require,module,exports) {
+'use strict';
+
+if ("development" === 'production') {
+  module.exports = require('./cjs/react-is.production.min.js');
+} else {
+  module.exports = require('./cjs/react-is.development.js');
+}
+},{"./cjs/react-is.development.js":"node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.development.js"}],"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js":[function(require,module,exports) {
 'use strict';
 
 var reactIs = require('react-is');
@@ -33107,7 +33062,7 @@ function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
 
 module.exports = hoistNonReactStatics;
 
-},{"react-is":"node_modules/react-is/index.js"}],"node_modules/react-router/esm/react-router.js":[function(require,module,exports) {
+},{"react-is":"node_modules/hoist-non-react-statics/node_modules/react-is/index.js"}],"node_modules/react-router/esm/react-router.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -34814,7 +34769,7 @@ const songs = [{
 }];
 var _default = songs;
 exports.default = _default;
-},{}],"Context.js":[function(require,module,exports) {
+},{}],"src/Context.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34825,7 +34780,7 @@ exports.Context = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _songs = _interopRequireDefault(require("./songs"));
+var _songs = _interopRequireDefault(require("../songs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -34938,142 +34893,264 @@ function ContextProvider(props) {
     }
   }, props.children);
 }
-},{"react":"node_modules/react/index.js","./songs":"songs.js"}],"Components/Header.js":[function(require,module,exports) {
-"use strict";
+},{"react":"node_modules/react/index.js","../songs":"songs.js"}],"src/icons/favorite.svg":[function(require,module,exports) {
+module.exports = "/favorite.4f73333d.svg";
+},{}],"src/icons/favorite-fill.svg":[function(require,module,exports) {
+module.exports = "/favorite-fill.79851a33.svg";
+},{}],"src/icons/arrow-up.svg":[function(require,module,exports) {
+module.exports = "/arrow-up.6cd1ac0a.svg";
+},{}],"src/icons/arrow-down.svg":[function(require,module,exports) {
+module.exports = "/arrow-down.cadbbc2f.svg";
+},{}],"src/icons/more.svg":[function(require,module,exports) {
+module.exports = "/more.3e2d6c27.svg";
+},{}],"src/icons/add-cart.svg":[function(require,module,exports) {
+module.exports = "/add-cart.ab36db6f.svg";
+},{}],"src/icons/shopping-cart-fill.svg":[function(require,module,exports) {
+module.exports = "/shopping-cart-fill.a81a2fa1.svg";
+},{}],"node_modules/react-is/cjs/react-is.development.js":[function(require,module,exports) {
+/** @license React v17.0.1
+ * react-is.development.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+if ("development" !== "production") {
+  (function () {
+    'use strict'; // ATTENTION
+    // When adding new symbols to this file,
+    // Please consider also adding to 'react-devtools-shared/src/backend/ReactSymbols'
+    // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+    // nor polyfill, then a plain number is used for performance.
 
-var _react = _interopRequireDefault(require("react"));
+    var REACT_ELEMENT_TYPE = 0xeac7;
+    var REACT_PORTAL_TYPE = 0xeaca;
+    var REACT_FRAGMENT_TYPE = 0xeacb;
+    var REACT_STRICT_MODE_TYPE = 0xeacc;
+    var REACT_PROFILER_TYPE = 0xead2;
+    var REACT_PROVIDER_TYPE = 0xeacd;
+    var REACT_CONTEXT_TYPE = 0xeace;
+    var REACT_FORWARD_REF_TYPE = 0xead0;
+    var REACT_SUSPENSE_TYPE = 0xead1;
+    var REACT_SUSPENSE_LIST_TYPE = 0xead8;
+    var REACT_MEMO_TYPE = 0xead3;
+    var REACT_LAZY_TYPE = 0xead4;
+    var REACT_BLOCK_TYPE = 0xead9;
+    var REACT_SERVER_BLOCK_TYPE = 0xeada;
+    var REACT_FUNDAMENTAL_TYPE = 0xead5;
+    var REACT_SCOPE_TYPE = 0xead7;
+    var REACT_OPAQUE_ID_TYPE = 0xeae0;
+    var REACT_DEBUG_TRACING_MODE_TYPE = 0xeae1;
+    var REACT_OFFSCREEN_TYPE = 0xeae2;
+    var REACT_LEGACY_HIDDEN_TYPE = 0xeae3;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+    if (typeof Symbol === 'function' && Symbol.for) {
+      var symbolFor = Symbol.for;
+      REACT_ELEMENT_TYPE = symbolFor('react.element');
+      REACT_PORTAL_TYPE = symbolFor('react.portal');
+      REACT_FRAGMENT_TYPE = symbolFor('react.fragment');
+      REACT_STRICT_MODE_TYPE = symbolFor('react.strict_mode');
+      REACT_PROFILER_TYPE = symbolFor('react.profiler');
+      REACT_PROVIDER_TYPE = symbolFor('react.provider');
+      REACT_CONTEXT_TYPE = symbolFor('react.context');
+      REACT_FORWARD_REF_TYPE = symbolFor('react.forward_ref');
+      REACT_SUSPENSE_TYPE = symbolFor('react.suspense');
+      REACT_SUSPENSE_LIST_TYPE = symbolFor('react.suspense_list');
+      REACT_MEMO_TYPE = symbolFor('react.memo');
+      REACT_LAZY_TYPE = symbolFor('react.lazy');
+      REACT_BLOCK_TYPE = symbolFor('react.block');
+      REACT_SERVER_BLOCK_TYPE = symbolFor('react.server.block');
+      REACT_FUNDAMENTAL_TYPE = symbolFor('react.fundamental');
+      REACT_SCOPE_TYPE = symbolFor('react.scope');
+      REACT_OPAQUE_ID_TYPE = symbolFor('react.opaque.id');
+      REACT_DEBUG_TRACING_MODE_TYPE = symbolFor('react.debug_trace_mode');
+      REACT_OFFSCREEN_TYPE = symbolFor('react.offscreen');
+      REACT_LEGACY_HIDDEN_TYPE = symbolFor('react.legacy_hidden');
+    } // Filter certain DOM attributes (e.g. src, href) if their values are empty strings.
 
-function Header() {
-  return /*#__PURE__*/_react.default.createElement("header", null, /*#__PURE__*/_react.default.createElement("h1", null, "Hit Parade"));
-}
 
-var _default = Header;
-exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"icons/favorite.svg":[function(require,module,exports) {
-module.exports = "/favorite.787c4752.svg";
-},{}],"icons/favorite-fill.svg":[function(require,module,exports) {
-module.exports = "/favorite-fill.ee79710d.svg";
-},{}],"icons/arrow-up.svg":[function(require,module,exports) {
-module.exports = "/arrow-up.9e9a63e9.svg";
-},{}],"icons/arrow-down.svg":[function(require,module,exports) {
-module.exports = "/arrow-down.8b5c0470.svg";
-},{}],"icons/more.svg":[function(require,module,exports) {
-module.exports = "/more.7876cacc.svg";
-},{}],"icons/add-cart.svg":[function(require,module,exports) {
-module.exports = "/add-cart.2660e35b.svg";
-},{}],"icons/shopping-cart-fill.svg":[function(require,module,exports) {
-module.exports = "/shopping-cart-fill.fa00e9f3.svg";
-},{}],"pages/PopularSongs.js":[function(require,module,exports) {
-"use strict";
+    var enableScopeAPI = false; // Experimental Create Event Handle API.
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
+    function isValidElementType(type) {
+      if (typeof type === 'string' || typeof type === 'function') {
+        return true;
+      } // Note: typeof might be other than 'symbol' or 'number' (e.g. if it's a polyfill).
 
-var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _favorite = _interopRequireDefault(require("../icons/favorite.svg"));
-
-var _favoriteFill = _interopRequireDefault(require("../icons/favorite-fill.svg"));
-
-var _arrowUp = _interopRequireDefault(require("../icons/arrow-up.svg"));
-
-var _arrowDown = _interopRequireDefault(require("../icons/arrow-down.svg"));
-
-var _more = _interopRequireDefault(require("../icons/more.svg"));
-
-var _addCart = _interopRequireDefault(require("../icons/add-cart.svg"));
-
-var _shoppingCartFill = _interopRequireDefault(require("../icons/shopping-cart-fill.svg"));
-
-var _Context = require("../Context");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function PopularSongs() {
-  const {
-    allSongs,
-    cartSongs,
-    addToCart,
-    removeSongs,
-    showSongDetail,
-    toggleFavorite,
-    increaseDislikes,
-    increaseLikes
-  } = (0, _react.useContext)(_Context.Context);
-  const sortedSongsByPopularity = allSongs.sort((a, b) => {
-    const ratio1 = a.likes - a.dislikes;
-    const ratio2 = b.likes - b.dislikes;
-    return ratio2 - ratio1;
-  });
-  const showSongs = sortedSongsByPopularity.map(song => {
-    function cartFunction() {
-      if (cartSongs.some(cartItem => cartItem.id === song.id)) {
-        return /*#__PURE__*/_react.default.createElement("img", {
-          src: _shoppingCartFill.default,
-          className: "icon-add-cart",
-          onClick: () => removeSongs(song.id)
-        });
-      } else {
-        return /*#__PURE__*/_react.default.createElement("img", {
-          src: _addCart.default,
-          className: "icon-add-cart",
-          onClick: () => addToCart(song)
-        });
+      if (type === REACT_FRAGMENT_TYPE || type === REACT_PROFILER_TYPE || type === REACT_DEBUG_TRACING_MODE_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || type === REACT_LEGACY_HIDDEN_TYPE || enableScopeAPI) {
+        return true;
       }
+
+      if (typeof type === 'object' && type !== null) {
+        if (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_BLOCK_TYPE || type[0] === REACT_SERVER_BLOCK_TYPE) {
+          return true;
+        }
+      }
+
+      return false;
     }
 
-    return /*#__PURE__*/_react.default.createElement("div", {
-      key: song.id,
-      className: "song-container"
-    }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
-      src: song.isFavorite ? _favoriteFill.default : _favorite.default,
-      onClick: () => toggleFavorite(song.id),
-      className: "favorite-line"
-    })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", {
-      className: "title"
-    }, song.title), /*#__PURE__*/_react.default.createElement("span", {
-      className: "artist"
-    }, song.artist)), /*#__PURE__*/_react.default.createElement("li", {
-      className: "list-items-container"
-    }, /*#__PURE__*/_react.default.createElement("span", null, song.likes), /*#__PURE__*/_react.default.createElement("img", {
-      src: _arrowUp.default,
-      onClick: () => increaseLikes(song.id),
-      className: "icon-like"
-    })), /*#__PURE__*/_react.default.createElement("li", {
-      className: "list-items-container"
-    }, /*#__PURE__*/_react.default.createElement("span", null, song.dislikes), /*#__PURE__*/_react.default.createElement("img", {
-      src: _arrowDown.default,
-      onClick: () => increaseDislikes(song.id),
-      className: "icon-dislike"
-    })), /*#__PURE__*/_react.default.createElement("li", null, cartFunction(song.id)), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-      to: `/songs/${song.id}`
-    }, /*#__PURE__*/_react.default.createElement("img", {
-      // onClick={showSongDetail} 
-      src: _more.default,
-      className: "icon-more"
-    })))));
-  });
-  return /*#__PURE__*/_react.default.createElement("div", null, showSongs);
-}
+    function typeOf(object) {
+      if (typeof object === 'object' && object !== null) {
+        var $$typeof = object.$$typeof;
 
-var _default = PopularSongs;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/favorite.svg":"icons/favorite.svg","../icons/favorite-fill.svg":"icons/favorite-fill.svg","../icons/arrow-up.svg":"icons/arrow-up.svg","../icons/arrow-down.svg":"icons/arrow-down.svg","../icons/more.svg":"icons/more.svg","../icons/add-cart.svg":"icons/add-cart.svg","../icons/shopping-cart-fill.svg":"icons/shopping-cart-fill.svg","../Context":"Context.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
+        switch ($$typeof) {
+          case REACT_ELEMENT_TYPE:
+            var type = object.type;
+
+            switch (type) {
+              case REACT_FRAGMENT_TYPE:
+              case REACT_PROFILER_TYPE:
+              case REACT_STRICT_MODE_TYPE:
+              case REACT_SUSPENSE_TYPE:
+              case REACT_SUSPENSE_LIST_TYPE:
+                return type;
+
+              default:
+                var $$typeofType = type && type.$$typeof;
+
+                switch ($$typeofType) {
+                  case REACT_CONTEXT_TYPE:
+                  case REACT_FORWARD_REF_TYPE:
+                  case REACT_LAZY_TYPE:
+                  case REACT_MEMO_TYPE:
+                  case REACT_PROVIDER_TYPE:
+                    return $$typeofType;
+
+                  default:
+                    return $$typeof;
+                }
+
+            }
+
+          case REACT_PORTAL_TYPE:
+            return $$typeof;
+        }
+      }
+
+      return undefined;
+    }
+
+    var ContextConsumer = REACT_CONTEXT_TYPE;
+    var ContextProvider = REACT_PROVIDER_TYPE;
+    var Element = REACT_ELEMENT_TYPE;
+    var ForwardRef = REACT_FORWARD_REF_TYPE;
+    var Fragment = REACT_FRAGMENT_TYPE;
+    var Lazy = REACT_LAZY_TYPE;
+    var Memo = REACT_MEMO_TYPE;
+    var Portal = REACT_PORTAL_TYPE;
+    var Profiler = REACT_PROFILER_TYPE;
+    var StrictMode = REACT_STRICT_MODE_TYPE;
+    var Suspense = REACT_SUSPENSE_TYPE;
+    var hasWarnedAboutDeprecatedIsAsyncMode = false;
+    var hasWarnedAboutDeprecatedIsConcurrentMode = false; // AsyncMode should be deprecated
+
+    function isAsyncMode(object) {
+      {
+        if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+          hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+          console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
+        }
+      }
+      return false;
+    }
+
+    function isConcurrentMode(object) {
+      {
+        if (!hasWarnedAboutDeprecatedIsConcurrentMode) {
+          hasWarnedAboutDeprecatedIsConcurrentMode = true; // Using console['warn'] to evade Babel and ESLint
+
+          console['warn']('The ReactIs.isConcurrentMode() alias has been deprecated, ' + 'and will be removed in React 18+.');
+        }
+      }
+      return false;
+    }
+
+    function isContextConsumer(object) {
+      return typeOf(object) === REACT_CONTEXT_TYPE;
+    }
+
+    function isContextProvider(object) {
+      return typeOf(object) === REACT_PROVIDER_TYPE;
+    }
+
+    function isElement(object) {
+      return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+    }
+
+    function isForwardRef(object) {
+      return typeOf(object) === REACT_FORWARD_REF_TYPE;
+    }
+
+    function isFragment(object) {
+      return typeOf(object) === REACT_FRAGMENT_TYPE;
+    }
+
+    function isLazy(object) {
+      return typeOf(object) === REACT_LAZY_TYPE;
+    }
+
+    function isMemo(object) {
+      return typeOf(object) === REACT_MEMO_TYPE;
+    }
+
+    function isPortal(object) {
+      return typeOf(object) === REACT_PORTAL_TYPE;
+    }
+
+    function isProfiler(object) {
+      return typeOf(object) === REACT_PROFILER_TYPE;
+    }
+
+    function isStrictMode(object) {
+      return typeOf(object) === REACT_STRICT_MODE_TYPE;
+    }
+
+    function isSuspense(object) {
+      return typeOf(object) === REACT_SUSPENSE_TYPE;
+    }
+
+    exports.ContextConsumer = ContextConsumer;
+    exports.ContextProvider = ContextProvider;
+    exports.Element = Element;
+    exports.ForwardRef = ForwardRef;
+    exports.Fragment = Fragment;
+    exports.Lazy = Lazy;
+    exports.Memo = Memo;
+    exports.Portal = Portal;
+    exports.Profiler = Profiler;
+    exports.StrictMode = StrictMode;
+    exports.Suspense = Suspense;
+    exports.isAsyncMode = isAsyncMode;
+    exports.isConcurrentMode = isConcurrentMode;
+    exports.isContextConsumer = isContextConsumer;
+    exports.isContextProvider = isContextProvider;
+    exports.isElement = isElement;
+    exports.isForwardRef = isForwardRef;
+    exports.isFragment = isFragment;
+    exports.isLazy = isLazy;
+    exports.isMemo = isMemo;
+    exports.isPortal = isPortal;
+    exports.isProfiler = isProfiler;
+    exports.isStrictMode = isStrictMode;
+    exports.isSuspense = isSuspense;
+    exports.isValidElementType = isValidElementType;
+    exports.typeOf = typeOf;
+  })();
+}
+},{}],"node_modules/react-is/index.js":[function(require,module,exports) {
+'use strict';
+
+if ("development" === 'production') {
+  module.exports = require('./cjs/react-is.production.min.js');
+} else {
+  module.exports = require('./cjs/react-is.development.js');
+}
+},{"./cjs/react-is.development.js":"node_modules/react-is/cjs/react-is.development.js"}],"node_modules/shallowequal/index.js":[function(require,module,exports) {
 //
 
 module.exports = function shallowEqual(objA, objB, compare, compareContext) {
@@ -36994,66 +37071,219 @@ exports.ServerStyleSheet = Ue;
 "production" !== "development" && "undefined" != typeof navigator && "ReactNative" === navigator.product && console.warn("It looks like you've imported 'styled-components' on React Native.\nPerhaps you're looking to import 'styled-components/native'?\nRead more about this at https://www.styled-components.com/docs/basics#react-native"), "production" !== "development" && "test" !== "development" && (window["__styled-components-init__"] = window["__styled-components-init__"] || 0, 1 === window["__styled-components-init__"] && console.warn("It looks like there are several instances of 'styled-components' initialized in this application. This may cause dynamic styles to not render properly, errors during the rehydration process, a missing theme prop, and makes your application bigger without good reason.\n\nSee https://s-c.sh/2BAXzed for more info."), window["__styled-components-init__"] += 1);
 var _default = qe;
 exports.default = _default;
-},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"icons/delete.svg":[function(require,module,exports) {
-module.exports = "/delete.491a0fad.svg";
-},{}],"Components/CartItem.js":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","react":"node_modules/react/index.js","shallowequal":"node_modules/shallowequal/index.js","@emotion/stylis":"node_modules/@emotion/stylis/dist/stylis.browser.esm.js","@emotion/unitless":"node_modules/@emotion/unitless/dist/unitless.browser.esm.js","@emotion/is-prop-valid":"node_modules/@emotion/is-prop-valid/dist/is-prop-valid.browser.esm.js","hoist-non-react-statics":"node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js","process":"../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"src/components/popularSongs/styles/popularSongs.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.IconLike = exports.IconFavorite = exports.IconDislike = exports.SongId = exports.ImgLike = exports.ImgFavorite = exports.ImgDislike = exports.DetailLink = exports.Cart = exports.Artist = exports.Title = exports.Item = exports.SongsContainer = exports.Container = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
-
-var _delete = _interopRequireDefault(require("../icons/delete.svg"));
-
-var _Context = require("../Context");
+var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+const Container = _styledComponents.default.div``;
+exports.Container = Container;
+const SongsContainer = _styledComponents.default.ul`
 
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+`;
+exports.SongsContainer = SongsContainer;
+const Item = _styledComponents.default.li`
 
-function CartItem({
-  song
+`;
+exports.Item = Item;
+const Title = _styledComponents.default.p`
+
+`;
+exports.Title = Title;
+const Artist = _styledComponents.default.span`
+
+`;
+exports.Artist = Artist;
+const Cart = _styledComponents.default.li`
+
+`;
+exports.Cart = Cart;
+const DetailLink = _styledComponents.default.li`
+
+`;
+exports.DetailLink = DetailLink;
+const ImgDislike = _styledComponents.default.li`
+ `;
+exports.ImgDislike = ImgDislike;
+const ImgFavorite = _styledComponents.default.li`
+ `;
+exports.ImgFavorite = ImgFavorite;
+const ImgLike = _styledComponents.default.li`
+ `;
+exports.ImgLike = ImgLike;
+const SongId = _styledComponents.default.li`
+
+ `;
+exports.SongId = SongId;
+const IconDislike = _styledComponents.default.img`
+
+ `;
+exports.IconDislike = IconDislike;
+const IconFavorite = _styledComponents.default.img`
+ 
+ `;
+exports.IconFavorite = IconFavorite;
+const IconLike = _styledComponents.default.img`
+ 
+ `;
+exports.IconLike = IconLike;
+},{"styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/components/popularSongs/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = PopularSongs;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _popularSongs = require("./styles/popularSongs");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function PopularSongs({
+  children,
+  ...restProps
 }) {
-  const {
-    removeSongs
-  } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "song-container"
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("img", {
-    onClick: () => removeSongs(song.id),
-    src: _delete.default,
-    alt: ""
-  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", {
-    className: "title"
-  }, song.title), /*#__PURE__*/_react.default.createElement("span", {
-    className: "artist"
-  }, song.artist)), /*#__PURE__*/_react.default.createElement("li", {
-    className: "price"
-  }, song.price, "Ar"))));
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.Container, restProps, children);
 }
 
-var _default = CartItem;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../icons/delete.svg":"icons/delete.svg","../Context":"Context.js"}],"pages/Cart.js":[function(require,module,exports) {
+PopularSongs.SongsContainer = function PopularSongsSongsContainer({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.SongsContainer, restProps, children);
+};
+
+PopularSongs.Item = function PopularSongsItem({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.Item, restProps, children);
+};
+
+PopularSongs.SongId = function PopularSongsSongId({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.SongId, restProps, children);
+};
+
+PopularSongs.Title = function PopularSongsTitle({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.Title, restProps, children);
+};
+
+PopularSongs.Artist = function PopularSongsArtist({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.Artist, restProps, children);
+};
+
+PopularSongs.Cart = function PopularSongsCart({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.Cart, restProps, children);
+};
+
+PopularSongs.DetailLink = function PopularSongsDetailLink({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.DetailLink, restProps, children);
+};
+
+PopularSongs.ImgFavorite = function PopularSongsImgFavorite({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.ImgFavorite, restProps, children);
+};
+
+PopularSongs.ImgLike = function PopularSongsImgLike({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.ImgLike, restProps, children);
+};
+
+PopularSongs.ImgDislike = function PopularSongsImgDislike({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.ImgDislike, restProps, children);
+};
+
+PopularSongs.IconFavorite = function PopularSongsIconFavorite({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.IconFavorite, restProps);
+};
+
+PopularSongs.IconLike = function PopularSongsIconLike({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.IconLike, restProps);
+};
+
+PopularSongs.IconDislike = function PopularSongsIconDislike({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.IconDislike, restProps);
+};
+},{"react":"node_modules/react/index.js","./styles/popularSongs":"src/components/popularSongs/styles/popularSongs.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+Object.defineProperty(exports, "PopularSongs", {
+  enumerable: true,
+  get: function () {
+    return _popularSongs.default;
+  }
+});
+
+var _popularSongs = _interopRequireDefault(require("./popularSongs"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./popularSongs":"src/components/popularSongs/index.js"}],"src/containers/popularSongs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = PopularSongsContainer;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _reactRouterDom = require("react-router-dom");
+
+var _favorite = _interopRequireDefault(require("../icons/favorite.svg"));
+
+var _favoriteFill = _interopRequireDefault(require("../icons/favorite-fill.svg"));
+
+var _arrowUp = _interopRequireDefault(require("../icons/arrow-up.svg"));
+
+var _arrowDown = _interopRequireDefault(require("../icons/arrow-down.svg"));
+
+var _more = _interopRequireDefault(require("../icons/more.svg"));
+
+var _addCart = _interopRequireDefault(require("../icons/add-cart.svg"));
+
+var _shoppingCartFill = _interopRequireDefault(require("../icons/shopping-cart-fill.svg"));
+
+var _components = require("../components");
 
 var _Context = require("../Context");
-
-var _CartItem = _interopRequireDefault(require("../Components/CartItem"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37061,441 +37291,116 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const StyleConatiner = _styledComponents.default.div`
-text-align : center;
-padding-top: 50px;
-p{
-  font-size: 25px;
-  font-weight: bold;
-}
-`;
-
-function Cart() {
-  const {
-    cartSongs,
-    emptyCart
-  } = (0, _react.useContext)(_Context.Context);
-  const [total, setTotal] = (0, _react.useState)(0);
-  (0, _react.useEffect)(() => {
-    const newTotal = cartSongs.reduce((total, song) => {
-      total += song.price;
-      return total;
-    }, 0);
-    setTotal(newTotal);
-  }, [cartSongs]);
-  const cartSongElements = cartSongs.map(song => /*#__PURE__*/_react.default.createElement(_CartItem.default, {
-    key: song.id,
-    song: song
-  }));
-
-  function completeOrder() {
-    // show the price somewhere (alert or console)
-    alert(`THANK YOU FOR YOUR ORDER. PLEASE PAY : ${total} Ar`); // empty the cart
-
-    emptyCart();
-  }
-
-  return /*#__PURE__*/_react.default.createElement("div", null, cartSongElements, cartSongs.length > 0 ? /*#__PURE__*/_react.default.createElement("div", {
-    className: "buying-container"
-  }, /*#__PURE__*/_react.default.createElement("p", null, "You have chosen ", /*#__PURE__*/_react.default.createElement("b", null, cartSongs.length), " songs"), /*#__PURE__*/_react.default.createElement("p", {
-    className: "amount"
-  }, "Total: ", /*#__PURE__*/_react.default.createElement("b", null, total, " Ar")), /*#__PURE__*/_react.default.createElement("button", {
-    className: "btn-to-buy",
-    onClick: completeOrder
-  }, "Buy")) : /*#__PURE__*/_react.default.createElement(StyleConatiner, null, /*#__PURE__*/_react.default.createElement("p", null, "This page is empty\uD83D\uDC4C")));
-}
-
-var _default = Cart;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../Context":"Context.js","../Components/CartItem":"Components/CartItem.js"}],"pages/Styles.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _Context = require("../Context");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const StylesContainer = _styledComponents.default.ul`
-	display: grid;
-  gap: 20px;
-  padding:0;
-  list-style: none;
-	a {
-		text-decoration: none;
-		color: #272343;
-    font-size: 64px;
-    line-height: 78px;
-    color: #000000;
-	}
-	a:hover {
-		color: #ffd803;
-  }
-  li {
-    margin-top : 54px;
-  }
-`;
-
-function Styles() {
-  const {
-    styles
-  } = (0, _react.useContext)(_Context.Context);
-  return /*#__PURE__*/_react.default.createElement(StylesContainer, null, styles.map(style => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: `/styles/${style}`,
-    key: style
-  }, /*#__PURE__*/_react.default.createElement("li", null, "\uD83C\uDFA7 ", style))));
-}
-
-var _default = Styles;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../Context":"Context.js"}],"Components/SongDetail.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _Context = require("../Context");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function SongDetail() {
-  const {
-    allSongs
-  } = (0, _react.useContext)(_Context.Context);
-  const {
-    id
-  } = (0, _reactRouterDom.useParams)();
-  const songWithDetail = allSongs.find(song => song.id == id);
-  console.log(id);
-  console.log(songWithDetail);
-  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("h3", null, songWithDetail?.artist, ": ", songWithDetail?.title), /*#__PURE__*/_react.default.createElement("div", {
-    className: "song-detail"
-  }, /*#__PURE__*/_react.default.createElement("h4", null, "Lyrics"), /*#__PURE__*/_react.default.createElement("p", null, songWithDetail?.lyrics)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, "Homepage"));
-}
-
-var _default = SongDetail;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"Components/SpecificSongs.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _Context = require("../Context");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function SpecificSongs() {
-  const {
-    style
-  } = (0, _reactRouterDom.useParams)();
+function PopularSongsContainer() {
   const {
     allSongs,
-    showSongDetail
+    cartSongs,
+    addToCart,
+    removeSongs,
+    showSongDetail,
+    toggleFavorite,
+    increaseDislikes,
+    increaseLikes
   } = (0, _react.useContext)(_Context.Context);
-  console.log(style);
-  const newSong = allSongs.filter(song => song.style === style);
-  console.log(newSong);
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement("div", {
-    className: "style--name"
-  }, /*#__PURE__*/_react.default.createElement("p", {
-    className: "style"
-  }, "\uD83C\uDFA7", style)), newSong.map(song => /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: `/songs/lyrics`,
-    key: song.id
-  }, /*#__PURE__*/_react.default.createElement("div", {
-    style: {
-      cursor: "pointer"
-    },
-    className: "card--style",
-    onClick: () => showSongDetail(song)
-  }, /*#__PURE__*/_react.default.createElement("p", {
-    className: "title"
-  }, song.title), /*#__PURE__*/_react.default.createElement("p", {
-    className: "artist"
-  }, song.artist)))));
-}
+  const sortedSongsByPopularity = allSongs.sort((a, b) => {
+    const ratio1 = a.likes - a.dislikes;
+    const ratio2 = b.likes - b.dislikes;
+    return ratio2 - ratio1;
+  });
+  const showSongs = sortedSongsByPopularity.map(song => {
+    function cartFunction() {
+      if (cartSongs.some(cartItem => cartItem.id === song.id)) {
+        return /*#__PURE__*/_react.default.createElement("img", {
+          src: _shoppingCartFill.default,
+          className: "icon-add-cart",
+          onClick: () => removeSongs(song.id)
+        });
+      } else {
+        return /*#__PURE__*/_react.default.createElement("img", {
+          src: _addCart.default,
+          className: "icon-add-cart",
+          onClick: () => addToCart(song)
+        });
+      }
+    }
 
-var _default = SpecificSongs;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../Context":"Context.js"}],"pages/Add.js":[function(require,module,exports) {
+    return /*#__PURE__*/_react.default.createElement(_components.PopularSongs, {
+      key: song.id
+    }, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.SongsContainer, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgFavorite, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconFavorite, {
+      src: song.isFavorite ? _favoriteFill.default : _favorite.default,
+      onClick: () => toggleFavorite(song.id)
+    })), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.SongId, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Title, null), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Artist, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgLike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconLike, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgDislike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconDislike, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Cart, null), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.DetailLink, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+      to: ""
+    }))));
+  });
+  return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showSongs);
+}
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/favorite.svg":"src/icons/favorite.svg","../icons/favorite-fill.svg":"src/icons/favorite-fill.svg","../icons/arrow-up.svg":"src/icons/arrow-up.svg","../icons/arrow-down.svg":"src/icons/arrow-down.svg","../icons/more.svg":"src/icons/more.svg","../icons/add-cart.svg":"src/icons/add-cart.svg","../icons/shopping-cart-fill.svg":"src/icons/shopping-cart-fill.svg","../components":"src/components/index.js","../Context":"src/Context.js"}],"src/pages/Home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = Home;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
-
-var _Context = require("../Context");
+var _popularSongs = _interopRequireDefault(require("../containers/popularSongs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-const AddFormContainer = _styledComponents.default.div`
-  h2 {
-    font-weight: normal;
-    font-size: 64px;
-    line-height: 78px;
-    color: #000000;
-    margin:0;
-    padding-top:42px;
-    padding-bottom: 62px;
-  }
-`;
-const FormStyles = _styledComponents.default.form`
-  display: flex;
-  flex-direction: row;
-  gap:70px;
-  align-items: flex-start;
-  ul {
-    display:flex;
-    flex-direction:column;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+function Home() {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.default, null);
 }
-
-	input,
-	select,
-	textarea {
-		background-color: #bae8e8;
-		border: none;
-    border-radius: 5px;
-    padding-top:12px;
-    padding-bottom:10px;
-    padding-left:47px;
-    font-size: 36px;
-    line-height: 44px;
-    color: #000000;
-    width: 561px;
-  }
- li:not(:nth-of-type(1)) {
-  margin-top:16px;
- }
- textarea {
-  height: 374px;
- }
-
- select {
-   width:100%;
- }
-
- button {
-  font-size: 64px;
-  line-height: 78px;
-  color: #000000;
-  padding-top:20px;
-  padding-left: 43px;
-  padding-bottom:22px;
-  padding-right:22px;
-  background-color:#FFD803;
-  border: none;
-  cursor:pointer;
- }
-`;
-
-function AddForm() {
-  const {
-    setAllSongs,
-    styles
-  } = (0, _react.useContext)(_Context.Context);
-
-  function submitForm(e) {
-    e.preventDefault();
-    const {
-      title,
-      artist,
-      price,
-      style,
-      lyrics
-    } = e.target;
-    const newSong = {
-      title: title.value,
-      artist: artist.value,
-      likes: 0,
-      dislikes: 0,
-      id: Date.now(),
-      style: style.value,
-      isFavorite: false,
-      price: price.value,
-      lyrics: lyrics.value,
-      isAdded: false
-    };
-    e.target.reset();
-    setAllSongs(prev => [...prev, newSong]);
-  }
-
-  return /*#__PURE__*/_react.default.createElement(AddFormContainer, null, /*#__PURE__*/_react.default.createElement("h2", null, "\uD83C\uDF1A Add a new song"), /*#__PURE__*/_react.default.createElement(FormStyles, {
-    onSubmit: submitForm
-  }, /*#__PURE__*/_react.default.createElement("ul", null, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    name: "title",
-    placeholder: "Title",
-    required: true
-  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "text",
-    name: "artist",
-    placeholder: "Artist",
-    required: true
-  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("input", {
-    type: "number",
-    name: "price",
-    placeholder: "Price",
-    required: true
-  })), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("select", {
-    name: "style",
-    required: true
-  }, styles.map(style => /*#__PURE__*/_react.default.createElement("option", {
-    key: style,
-    value: style
-  }, style)))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("textarea", {
-    name: "lyrics",
-    placeholder: "Lyrics" // cols="30" rows="10" 
-    ,
-    required: true
-  }))), /*#__PURE__*/_react.default.createElement("button", {
-    type: "submit"
-  }, "Add")));
-}
-
-var _default = AddForm;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../Context":"Context.js"}],"Components/Menu.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../containers/popularSongs":"src/containers/popularSongs.js"}],"src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = Menu;
+exports.default = App;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _reactRouterDom = require("react-router-dom");
 
-var _styledComponents = _interopRequireDefault(require("styled-components"));
+var _Home = _interopRequireDefault(require("./pages/Home"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-const MenuStyles = _styledComponents.default.ul`
-	display: flex;
-	list-style: none;
-    gap: 20px;
-    padding:0;
-    justify-content: space-between;
-	a {
-        text-decoration: none;
-        font-size: 36px;
-        line-height: 44px;
-        color: #272343;
-    }
-    a:focus {
-        font-weight: bold;
-    }
-	a:hover {
-		color: yellow;
-	}
-`;
-
-function Menu() {
-  return /*#__PURE__*/_react.default.createElement(MenuStyles, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/"
-  }, /*#__PURE__*/_react.default.createElement("li", null, "\uD83D\uDD25 Popular Songs")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/styles"
-  }, /*#__PURE__*/_react.default.createElement("li", null, "\uD83D\uDC97 Styles")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/add"
-  }, /*#__PURE__*/_react.default.createElement("li", null, "\uD83C\uDF1A Add")), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
-    to: "/cart"
-  }, /*#__PURE__*/_react.default.createElement("li", null, "\uD83D\uDED2 Cart")));
-}
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"App.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactRouterDom = require("react-router-dom");
-
-var _Header = _interopRequireDefault(require("./Components/Header"));
-
-var _PopularSongs = _interopRequireDefault(require("./pages/PopularSongs"));
-
-var _Cart = _interopRequireDefault(require("./pages/Cart"));
-
-var _Styles = _interopRequireDefault(require("./pages/Styles"));
-
-var _SongDetail = _interopRequireDefault(require("./Components/SongDetail"));
-
-var _SpecificSongs = _interopRequireDefault(require("./Components/SpecificSongs"));
-
-var _Add = _interopRequireDefault(require("./pages/Add"));
-
-var _Menu = _interopRequireDefault(require("./Components/Menu"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+// import Header from './Components/Header';
+// import PopularSongs from './pages/PopularSongs';
+// import Cart from './pages/Cart';
+// import Styles from './pages/Styles';
+// import SongDetail from './Components/SongDetail';
+// import SpecificSongs from './Components/SpecificSongs';
+// import AddForm from './pages/Add';
+// import Menu from './Components/Menu';
 function App() {
-  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_Header.default, null), /*#__PURE__*/_react.default.createElement(_Menu.default, null), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
+  return /*#__PURE__*/_react.default.createElement("div", null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Switch, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
     exact: true,
     path: "/"
-  }, /*#__PURE__*/_react.default.createElement(_PopularSongs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    exact: true,
-    path: "/styles"
-  }, /*#__PURE__*/_react.default.createElement(_Styles.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/styles/:style"
-  }, /*#__PURE__*/_react.default.createElement(_SpecificSongs.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/add"
-  }, /*#__PURE__*/_react.default.createElement(_Add.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/cart"
-  }, /*#__PURE__*/_react.default.createElement(_Cart.default, null)), /*#__PURE__*/_react.default.createElement(_reactRouterDom.Route, {
-    path: "/songs/:id"
-  }, /*#__PURE__*/_react.default.createElement(_SongDetail.default, null))));
+  }, /*#__PURE__*/_react.default.createElement(_Home.default, null))));
 }
+/* <Header />
+      <Menu /> */
 
-var _default = App;
-exports.default = _default;
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Components/Header":"Components/Header.js","./pages/PopularSongs":"pages/PopularSongs.js","./pages/Cart":"pages/Cart.js","./pages/Styles":"pages/Styles.js","./Components/SongDetail":"Components/SongDetail.js","./Components/SpecificSongs":"Components/SpecificSongs.js","./pages/Add":"pages/Add.js","./Components/Menu":"Components/Menu.js"}],"index.js":[function(require,module,exports) {
+/* <Route exact path="/styles">
+    <Styles />
+</Route>
+<Route path="/styles/:style">
+    <SpecificSongs />
+</Route>
+<Route path="/add">
+  <AddForm />
+</Route>
+<Route path="/cart">
+    <Cart />
+</Route>
+<Route path="/songs/:id">
+    <SongDetail />
+</Route> */
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./pages/Home":"src/pages/Home.js"}],"src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -37510,10 +37415,8 @@ var _App = _interopRequireDefault(require("./App"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log();
-
 _reactDom.default.render( /*#__PURE__*/_react.default.createElement(_Context.ContextProvider, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.BrowserRouter, null, /*#__PURE__*/_react.default.createElement(_App.default, null))), document.getElementById('root'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"Context.js","./App":"App.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","./Context":"src/Context.js","./App":"src/App.js"}],"../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -37541,7 +37444,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52903" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56549" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -37717,5 +37620,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
-//# sourceMappingURL=/hit-parade-react.e31bb0bc.js.map
+},{}]},{},["../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","src/index.js"], null)
+//# sourceMappingURL=/src.a2b27638.js.map

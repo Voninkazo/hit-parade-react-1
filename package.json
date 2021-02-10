@@ -1,18 +1,24 @@
 {
-  "name": "hit-parade-react",
-  "version": "1.0.0",
-  "description": "I will document my amazing project in the future.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-icons": "^3.11.0",
-    "react-router-dom": "^5.2.0",
-    "styled-components": "^5.2.1"
-  }
+    "name": "hit-parade-react",
+    "version": "1.0.0",
+    "description": "I will document my amaizing project here!",
+    "main": "index.js",
+    "scripts": {
+        "start": "parcel index.html"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "react": "^17.0.1",
+        "react-dom": "^17.0.1",
+        "react-is": "^17.0.1",
+        "react-router-dom": "^5.2.0",
+        "styled-components": "^5.2.1"
+    },
+    "browserslist": [
+        "last 1 chrome version"
+    ],
+    "devDependencies": {
+        "sass": "^1.32.7"
+    }
 }

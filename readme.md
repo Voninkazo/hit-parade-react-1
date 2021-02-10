@@ -1,3 +1,3 @@
-# Hit Parade in React
+# Hit parade in React
 
-I will document my amazing project in the future.
+![screesnshot](./images/hit-parade.png)
