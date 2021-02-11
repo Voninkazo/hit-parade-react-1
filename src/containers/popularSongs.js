@@ -49,7 +49,6 @@ export default function PopularSongsContainer() {
                     onClick={() => addToCart(song)}
                      />
                 }
-
         }
 
     return (
@@ -75,7 +74,7 @@ export default function PopularSongsContainer() {
                 </PopularSongs.ImgDislike>
                 <PopularSongs.Cart>{cartFunction(song.id)}</PopularSongs.Cart>
                 <PopularSongs.DetailLink>
-                    <Link to="">
+                    <Link to={`/songs/${song.id}`}>
                         <IconLink src={more}/>
                     </Link>
                 </PopularSongs.DetailLink>
