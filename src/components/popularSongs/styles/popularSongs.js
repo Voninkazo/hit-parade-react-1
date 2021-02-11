@@ -39,6 +39,15 @@ export const ImgDislike = styled.li`
 
  `;
 
+ export const TextSmall = styled.span`
+
+ `;
+
+
+ export const IconLink = styled.img`
+
+ `;
+
  export const IconDislike = styled.img`
 
  `;

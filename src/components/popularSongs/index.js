@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Container, Item, SongsContainer, IconDislike, IconFavorite, IconLike,Title, Artist,Cart,DetailLink,
-    ImgDislike, ImgFavorite, ImgLike,SongId,
+    ImgDislike, ImgFavorite, ImgLike,SongId,TextSmall,IconLink,
 } from './styles/popularSongs';
 
 export default function PopularSongs({children, ...restProps}) {
@@ -60,5 +60,12 @@ PopularSongs.IconDislike = function PopularSongsIconDislike({ ...restProps}) {
     return <IconDislike {...restProps} />
 }
 
+PopularSongs.IconLink = function PopularSongsIconLink({ ...restProps}) {
+    return <IconLink {...restProps} />
+}
+
+PopularSongs.TextSmall = function PopularSongsTextSmall({children, ...restProps}) {
+    return <TextSmall {...restProps}>{children}</TextSmall>
+}
 
 

@@ -12,6 +12,7 @@ import cartIcon from '../icons/shopping-cart-fill.svg';
 
 import {PopularSongs} from '../components';
 import {Context} from '../Context';
+import { IconLink } from '../components/popularSongs/styles/popularSongs';
 
 export default function PopularSongsContainer() {
     const {allSongs,
@@ -61,18 +62,22 @@ export default function PopularSongsContainer() {
                          />
                 </PopularSongs.ImgFavorite>
                 <PopularSongs.SongId>
-                    <PopularSongs.Title></PopularSongs.Title>
-                    <PopularSongs.Artist></PopularSongs.Artist>
+                    <PopularSongs.Title>{song.title}</PopularSongs.Title>
+                    <PopularSongs.Artist>{song.artist}</PopularSongs.Artist>
                 </PopularSongs.SongId>
                 <PopularSongs.ImgLike>
-                    <PopularSongs.IconLike />
+                    <PopularSongs.TextSmall>{song.likes}</PopularSongs.TextSmall>
+                    <PopularSongs.IconLike src={arrowUp} onClick={() => increaseLikes(song.id)} />
                 </PopularSongs.ImgLike>
                 <PopularSongs.ImgDislike>
-                    <PopularSongs.IconDislike />
+                    <PopularSongs.TextSmall>{song.dislikes}</PopularSongs.TextSmall>
+                    <PopularSongs.IconDislike src={arrowDown} onClick={() => increaseDislikes(song.id)}/>
                 </PopularSongs.ImgDislike>
-                <PopularSongs.Cart></PopularSongs.Cart>
+                <PopularSongs.Cart>{cartFunction(song.id)}</PopularSongs.Cart>
                 <PopularSongs.DetailLink>
-                    <Link to=""></Link>
+                    <Link to="">
+                        <IconLink src={more}/>
+                    </Link>
                 </PopularSongs.DetailLink>
             </PopularSongs.SongsContainer>
         </PopularSongs>

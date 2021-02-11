@@ -37077,7 +37077,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.IconLike = exports.IconFavorite = exports.IconDislike = exports.SongId = exports.ImgLike = exports.ImgFavorite = exports.ImgDislike = exports.DetailLink = exports.Cart = exports.Artist = exports.Title = exports.Item = exports.SongsContainer = exports.Container = void 0;
+exports.IconLike = exports.IconFavorite = exports.IconDislike = exports.IconLink = exports.TextSmall = exports.SongId = exports.ImgLike = exports.ImgFavorite = exports.ImgDislike = exports.DetailLink = exports.Cart = exports.Artist = exports.Title = exports.Item = exports.SongsContainer = exports.Container = void 0;
 
 var _styledComponents = _interopRequireDefault(require("styled-components"));
 
@@ -37122,6 +37122,14 @@ const SongId = _styledComponents.default.li`
 
  `;
 exports.SongId = SongId;
+const TextSmall = _styledComponents.default.span`
+
+ `;
+exports.TextSmall = TextSmall;
+const IconLink = _styledComponents.default.img`
+
+ `;
+exports.IconLink = IconLink;
 const IconDislike = _styledComponents.default.img`
 
  `;
@@ -37239,6 +37247,18 @@ PopularSongs.IconDislike = function PopularSongsIconDislike({ ...restProps
 }) {
   return /*#__PURE__*/_react.default.createElement(_popularSongs.IconDislike, restProps);
 };
+
+PopularSongs.IconLink = function PopularSongsIconLink({ ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.IconLink, restProps);
+};
+
+PopularSongs.TextSmall = function PopularSongsTextSmall({
+  children,
+  ...restProps
+}) {
+  return /*#__PURE__*/_react.default.createElement(_popularSongs.TextSmall, restProps, children);
+};
 },{"react":"node_modules/react/index.js","./styles/popularSongs":"src/components/popularSongs/styles/popularSongs.js"}],"src/components/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -37285,6 +37305,8 @@ var _components = require("../components");
 
 var _Context = require("../Context");
 
+var _popularSongs = require("../components/popularSongs/styles/popularSongs");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -37329,13 +37351,21 @@ function PopularSongsContainer() {
     }, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.SongsContainer, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgFavorite, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconFavorite, {
       src: song.isFavorite ? _favoriteFill.default : _favorite.default,
       onClick: () => toggleFavorite(song.id)
-    })), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.SongId, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Title, null), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Artist, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgLike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconLike, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgDislike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconDislike, null)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Cart, null), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.DetailLink, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
+    })), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.SongId, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Title, null, song.title), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Artist, null, song.artist)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgLike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.TextSmall, null, song.likes), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconLike, {
+      src: _arrowUp.default,
+      onClick: () => increaseLikes(song.id)
+    })), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.ImgDislike, null, /*#__PURE__*/_react.default.createElement(_components.PopularSongs.TextSmall, null, song.dislikes), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.IconDislike, {
+      src: _arrowDown.default,
+      onClick: () => increaseDislikes(song.id)
+    })), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.Cart, null, cartFunction(song.id)), /*#__PURE__*/_react.default.createElement(_components.PopularSongs.DetailLink, null, /*#__PURE__*/_react.default.createElement(_reactRouterDom.Link, {
       to: ""
-    }))));
+    }, /*#__PURE__*/_react.default.createElement(_popularSongs.IconLink, {
+      src: _more.default
+    })))));
   });
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, showSongs);
 }
-},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/favorite.svg":"src/icons/favorite.svg","../icons/favorite-fill.svg":"src/icons/favorite-fill.svg","../icons/arrow-up.svg":"src/icons/arrow-up.svg","../icons/arrow-down.svg":"src/icons/arrow-down.svg","../icons/more.svg":"src/icons/more.svg","../icons/add-cart.svg":"src/icons/add-cart.svg","../icons/shopping-cart-fill.svg":"src/icons/shopping-cart-fill.svg","../components":"src/components/index.js","../Context":"src/Context.js"}],"src/pages/Home.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../icons/favorite.svg":"src/icons/favorite.svg","../icons/favorite-fill.svg":"src/icons/favorite-fill.svg","../icons/arrow-up.svg":"src/icons/arrow-up.svg","../icons/arrow-down.svg":"src/icons/arrow-down.svg","../icons/more.svg":"src/icons/more.svg","../icons/add-cart.svg":"src/icons/add-cart.svg","../icons/shopping-cart-fill.svg":"src/icons/shopping-cart-fill.svg","../components":"src/components/index.js","../Context":"src/Context.js","../components/popularSongs/styles/popularSongs":"src/components/popularSongs/styles/popularSongs.js"}],"src/pages/Home.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -37444,7 +37474,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56549" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59616" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
