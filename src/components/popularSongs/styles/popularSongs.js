@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
-export const Container = styled.div``;
+export const Container = styled.div`
+`;
 
 export const SongsContainer = styled.ul`
         list-style: none;
         padding: 0;
         display: flex;
         flex-direction: row;
-        // justify-content: space-between;
+        justify-content: space-between;
         // align-items: center;
         gap:56px;
         margin:0;

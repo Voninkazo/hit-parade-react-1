@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import SpecificSongs from '../components/specificSongs';
-import { Context } from '../Context';
 
 export default function SpecificSongsContainer() {
     const {style} = useParams();
-    const {allSongs, showSongDetail} = useContext(Context);
-
-    console.log(style)
-    console.log(allSongs)
+    const allSongs = useSelector(state => state.allSongs);
+    
     const newSong = allSongs.filter(song => song.style === style);
 
     return (
@@ -20,7 +18,7 @@ export default function SpecificSongsContainer() {
             {
                 newSong.map(song => (
                     <Link to={`/songs/${song.id}`} key={song.id}>
-                        <SpecificSongs.Group onClick={() => showSongDetail(song)}>
+                        <SpecificSongs.Group>
                             <SpecificSongs.Title>{song.title}</SpecificSongs.Title>
                             <SpecificSongs.Artist>{song.artist}</SpecificSongs.Artist>
                         </SpecificSongs.Group>

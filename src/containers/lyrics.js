@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import Lyrics from '../components/lyrics';
-import { Context } from '../Context';
 
 function LyricsContainer() {
-    const { allSongs} = useContext(Context);
+    const allSongs = useSelector(state => state.allSongs);
+
     const {id} = useParams();
     console.log(id)
     const songWithDetail = allSongs.find(song => song.id == id);

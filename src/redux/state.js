@@ -1,4 +1,8 @@
-const songs = [{
+
+export default {
+    cartSongs: [],
+    styles: ['Pop', 'Rap', 'Reggae', 'RNB', 'Slow', 'Rap & Rock', 'Jazz', 'Pop & Rock'],
+    allSongs: [{
         id: 1605846877288,
         artist: "Mr Sayda",
         title: "Tsy Hanampetra",
@@ -499,6 +503,5 @@ const songs = [{
         Oh, oh, ohhh        
         `,
     },
-]
-
-export default songs;
+],
+}

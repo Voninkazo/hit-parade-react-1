@@ -1,27 +1,29 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {Context} from '../Context';
 import SongStyles from '../components/songStyles';
 
 
 export default function SongStylesContainer() {
-    const {styles} = useContext(Context);
+    const styles =useSelector(state => state.styles);
+
     console.log(styles);
 
     return (
        <SongStyles>
+            <SongStyles.StylesContainer>
            {
                styles.map(style => {
                    return (
-                    <SongStyles.StylesContainer key={style}>
-                        <Link  to={`/styles/${style}`} >
-                            <SongStyles.Style>{style}</SongStyles.Style>
+                   
+                        <Link  to={`/styles/${style}`} key={style}>
+                            <SongStyles.Style>🎧 {style}</SongStyles.Style>
                         </Link>
-                    </SongStyles.StylesContainer>
                    )
                })
            }
+           </SongStyles.StylesContainer>
        </SongStyles>
     )
 }

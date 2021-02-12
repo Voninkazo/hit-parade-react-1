@@ -1,5 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import favoriteBorder from '../icons/favorite.svg';
 import  favorite from '../icons/favorite-fill.svg';
@@ -9,21 +10,17 @@ import more from '../icons/more.svg';
 import addCartIcon from '../icons/add-cart.svg';
 import cartIcon from '../icons/shopping-cart-fill.svg';
 
-
 import {PopularSongs} from '../components';
-import {Context} from '../Context';
-import { IconLink } from '../components/popularSongs/styles/popularSongs';
+import {favoriteSongs, downvoteSongs,upvoteSongs} from '../redux/actions/allSongsActions';
+import {addToCart, removeSongs,} from '../redux/actions/cartsongsActions';
 
 export default function PopularSongsContainer() {
-    const {allSongs,
-        cartSongs,
-        addToCart, 
-        removeSongs,
-        showSongDetail,
-        toggleFavorite,
-        increaseDislikes,
-        increaseLikes
-    } = useContext(Context);
+
+    const allSongs = useSelector(state => state.allSongs);
+    const cartSongs = useSelector(state => state.cartSongs);
+
+    const dispatch = useDispatch();
+    console.log(allSongs);
 
     const sortedSongsByPopularity =  
         allSongs.sort((a,b) =>{ const ratio1 = a.likes - a.dislikes;
@@ -39,14 +36,14 @@ export default function PopularSongsContainer() {
                     return <img 
                     src={cartIcon} 
                     className="icon-add-cart" 
-                    onClick={() => removeSongs(song.id)}
+                    onClick={() => dispatch(removeSongs(song.id))}
                      />
                 }
                 else{
                     return <img 
                     src={addCartIcon} 
                     className="icon-add-cart" 
-                    onClick={() => addToCart(song)}
+                    onClick={() => dispatch(addToCart(song))}
                      />
                 }
         }
@@ -57,7 +54,7 @@ export default function PopularSongsContainer() {
                 <PopularSongs.ImgFavorite>
                     <PopularSongs.IconFavorite 
                         src={song.isFavorite ? favorite : favoriteBorder} 
-                        onClick={() => toggleFavorite(song.id)} 
+                        onClick={() => dispatch(favoriteSongs(song.id))} 
                          />
                 </PopularSongs.ImgFavorite>
                 <PopularSongs.SongId>
@@ -66,16 +63,20 @@ export default function PopularSongsContainer() {
                 </PopularSongs.SongId>
                 <PopularSongs.ImgLike>
                     <PopularSongs.TextSmall>{song.likes}</PopularSongs.TextSmall>
-                    <PopularSongs.IconLike src={arrowUp} onClick={() => increaseLikes(song.id)} />
+                    <PopularSongs.IconLike src={arrowUp} 
+                    onClick={() => dispatch(upvoteSongs(song.id))}
+                     />
                 </PopularSongs.ImgLike>
                 <PopularSongs.ImgDislike>
                     <PopularSongs.TextSmall>{song.dislikes}</PopularSongs.TextSmall>
-                    <PopularSongs.IconDislike src={arrowDown} onClick={() => increaseDislikes(song.id)}/>
+                    <PopularSongs.IconDislike src={arrowDown} 
+                    onClick={() => dispatch(downvoteSongs(song.id))}
+                    />
                 </PopularSongs.ImgDislike>
                 <PopularSongs.Cart>{cartFunction(song.id)}</PopularSongs.Cart>
                 <PopularSongs.DetailLink>
                     <Link to={`/songs/${song.id}`}>
-                        <IconLink src={more}/>
+                        <PopularSongs.IconLink src={more}/>
                     </Link>
                 </PopularSongs.DetailLink>
             </PopularSongs.SongsContainer>

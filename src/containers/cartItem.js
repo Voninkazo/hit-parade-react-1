@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import deleteIcon from '../icons/delete.svg'
 
 import CartItem from '../components/cartItem';
-import { Context } from '../Context';
+import { useDispatch } from 'react-redux';
+import {removeSongs} from '../redux/actions/cartsongsActions';
 
 function CartItemContainer({song}) {
-    const {removeSongs} = useContext(Context);
-
+    const dispatch = useDispatch();
     return (
        <CartItem>
            <CartItem.Wrapper>
                <CartItem.IconDelete 
-               onClick={() => removeSongs(song.id)} 
+               onClick={() => dispatch(removeSongs(song.id))} 
                src={deleteIcon} 
                alt="Delete"
                />

@@ -13,13 +13,8 @@ padding: 0;
 `;
 
 export const Page = styled.li`
-    a {
         font-size: 36px;
         line-height: 44px;
         color: #272343;
         white-space: nowrap;
-    }
-    a:focus {
-        font-weight: bold;
-    }
 `;

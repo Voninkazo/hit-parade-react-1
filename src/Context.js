@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import songs from '../songs';
+import songs from './redux/songs';
 const Context = React.createContext();
 
 

@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Context } from '../Context';
+import React, { useEffect, useState } from 'react';
 
 import CartItemContainer from './cartItem';
 import Cart from '../components/cart';
-import { Group } from '../components/cartItem/styles/cartItem';
+import { useDispatch, useSelector } from 'react-redux';
+import {emptyCart} from '../redux/actions/cartsongsActions';
 
 function CartContainer() {
-    const {cartSongs,emptyCart} = useContext(Context);
+    const cartSongs = useSelector(state => state.cartSongs);
+    const dispatch = useDispatch();
+  
     const [total,setTotal] = useState(0);
 
     useEffect(() => {
@@ -25,7 +27,7 @@ function CartContainer() {
         // show the price somewhere (alert or console)
         alert(`THANK YOU FOR YOUR ORDER. PLEASE PAY : ${total} Ar`);
         // empty the cart
-        emptyCart();
+        dispatch(emptyCart());
       }  
 
     return (

@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Add from '../components/add';
-import { Context } from '../Context';
+import {addSongs} from '../redux/actions/allSongsActions';
 
 function AddContainer() {
-    const {setAllSongs, styles} = useContext(Context);
+    const dispatch = useDispatch();
+    const styles = useSelector(state => state.styles);
+
     function submitForm(e) {
         e.preventDefault();
         const {title,artist,price,style,lyrics} = e.target;
@@ -21,7 +24,7 @@ function AddContainer() {
             isAdded : false
         }
         e.target.reset();
-        setAllSongs(prev => [...prev,newSong])
+        dispatch(addSongs(newSong))
     }
 
 
